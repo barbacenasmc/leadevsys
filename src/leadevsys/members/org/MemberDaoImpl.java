@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 public class MemberDaoImpl implements MemberDao{
     
     private final Connection conn = ConnectDB.getConnection();
-    private final String SQL_CREATE_MEMBER = "INSERT INTO MEMBERS (member_id,fname,mname,lname) VALUES (?,?,?,?)";
+    private final String SQL_CREATE_MEMBER = "INSERT INTO MEMBERS (member_id,fname,mname,lname,location, gender, civil_status, contact_no, birthdate, school, occupation, leader_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
     private final String SQL_GET_MEMBER_BY_ID = "SELECT* FROM MEMBERS WHERE member_id=?";
     private final String SQL_GET_ALL_MEMBERS = "SELECT * FROM MEMBERS";
     private final String SQL_UPDATE_MEMBER = "UPDATE members SET fname = ?, mname = ?, lname = ? WHERE member_id = ?";
@@ -30,7 +30,15 @@ public class MemberDaoImpl implements MemberDao{
                     member.setMemberId(rs.getInt(1));
                     member.setFname(rs.getString(2));
                     member.setMname(rs.getString(3));
-                    member.setLname(rs.getString(4));
+                    member.setLname(rs.getString(4));                    
+                    member.setMemberLocation(rs.getString(5));                    
+                    member.setGender(rs.getString(5));                    
+                    member.setCivilStatus(rs.getString(6));                    
+                    member.setContactNo(rs.getString(7));                    
+                    member.setBirthdate(rs.getString(8));                    
+                    member.setSchool(rs.getString(9));                    
+                    member.setOccupation(rs.getString(10));                    
+                    member.setLeader_id(rs.getInt(11));
                     allMembers.add(member);
                 }
             
