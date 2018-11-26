@@ -16,6 +16,7 @@ public class MemberDaoImpl implements MemberDao{
     private final Connection conn = ConnectDB.getConnection();
     private final String SQL_CREATE_MEMBER = "INSERT INTO MEMBERS (member_id,fname,mname,lname,location, gender, civil_status, contact_no, birthdate, school, occupation, leader_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
     private final String SQL_GET_MEMBER_BY_ID = "SELECT* FROM MEMBERS WHERE member_id=?";
+  //  private final String SQL_GET_MEMBER_BY_NAME = "SELECT* FROM MEMBERS WHERE fname=? or ";
     private final String SQL_GET_ALL_MEMBERS = "SELECT * FROM MEMBERS";
     private final String SQL_UPDATE_MEMBER = "UPDATE members SET fname = ?, mname = ?, lname = ?,location = ?, gender = ?, civil_status = ?, contact_no = ?, birthdate = ?, school = ?, occupation = ?, leader_id = ? WHERE member_id = ?";
     private final String SQL_DELETE_MEMBER = "DELETE FROM members WHERE member_id = ?";

@@ -22,7 +22,7 @@ public class MemberMgtView extends JFrame implements ActionListener{
         JScrollPane jScrollPane1 = new JScrollPane();
         JTable memberTable = new JTable();
         JTextField searchMemberFld = new JTextField();
-        JButton searchMemberBtn = new JButton();
+        JButton searchBtn = new JButton();
         JButton addBtn = new JButton();
         JButton editBtn = new JButton ();
         JButton deleteBtn = new JButton();
@@ -37,7 +37,7 @@ public class MemberMgtView extends JFrame implements ActionListener{
         dashboardTitleLbl.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         dashboardTitleLbl.setText("Member Management Dashboard");
         searchMemberFld.setText("Enter search keyword");
-        searchMemberBtn.setText("Search");
+        searchBtn.setText("Search");
         addBtn.setText("Add");
         editBtn.setText("Edit");
         deleteBtn.setText("Delete");
@@ -46,11 +46,13 @@ public class MemberMgtView extends JFrame implements ActionListener{
         mainViewPanel.add(dashboardTitleLbl);
         mainViewPanel.add(jScrollPane1, BorderLayout.CENTER);
         mainViewPanel.add(searchMemberFld);
-        mainViewPanel.add(searchMemberBtn);
+        mainViewPanel.add(searchBtn);
         mainViewPanel.add(addBtn);
         addBtn.addActionListener(this);
         editBtn.addActionListener(this);
         deleteBtn.addActionListener(this);
+        searchBtn.addActionListener(this);
+        
         this.add(mainViewPanel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        // this.setSize(2000, 1500);
@@ -71,7 +73,7 @@ public class MemberMgtView extends JFrame implements ActionListener{
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(searchMemberFld, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(searchMemberBtn))
+                                .addComponent(searchBtn))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -89,7 +91,7 @@ public class MemberMgtView extends JFrame implements ActionListener{
                 .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchMemberFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchMemberBtn))
+                    .addComponent(searchBtn))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -147,8 +149,11 @@ public class MemberMgtView extends JFrame implements ActionListener{
             this.dispose();
             MemberMgtView view = new MemberMgtView();
             view.setVisible(true);
-          }
+       }else if(e.getSource()==searchBtn){
+           
 
       }
     }
-}
+    }
+}    
+
