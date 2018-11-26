@@ -101,10 +101,10 @@ public class LoginView extends JFrame implements ActionListener{
                 this.dispose();
                 //View view = new AddMemberView();
                 //view.setVisible(true);
-//                MainView mainView = new MainView();
-//                mainView.setVisible(true);
-                  MemberMgtView memberMgtview = new MemberMgtView();
-                  memberMgtview.setVisible(true);
+                    MainView mainView = new MainView();
+                    mainView.setVisible(true);
+                 // MemberMgtView memberMgtview = new MemberMgtView();
+                 // memberMgtview.setVisible(true);
                   
             }else {
                 JOptionPane.showMessageDialog(null,"Invalid Credentials!");
