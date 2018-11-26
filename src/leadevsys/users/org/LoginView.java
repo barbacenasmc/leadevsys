@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
-import leadevsys.members.org.MainView;
+import demo.MainView;
 import leadevsys.members.org.MemberMgtView;
 
 public class LoginView extends JFrame implements ActionListener{

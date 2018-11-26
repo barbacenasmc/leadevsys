@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import leadevsys.members.org.MainView;
+import demo.MainView;
 
 public class AddCGView extends JFrame implements ActionListener{
     CellGroupDao cgDao = new CellGroupDaoImpl();
