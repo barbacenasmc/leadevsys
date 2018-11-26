@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -26,20 +27,23 @@ public class AddMemberView extends JFrame implements ActionListener{
     JLabel schoolLbl = new JLabel();
     JTextField birthdateFld = new JTextField();;
     JLabel birthdateLbl = new JLabel();
-    JTextField civilStatusFld = new JTextField();;
+    JComboBox civilStatusFld = new JComboBox();;
     JLabel civilStatusLbl = new JLabel();
     JTextField contactNoFld = new JTextField();;
     JLabel contactNoLbl = new JLabel();
     JTextField genderFld = new JTextField();
     JLabel genderLbl = new JLabel();
-    private JButton cancelBtn = new JButton();
-    private JButton saveBtn = new JButton();
+    JComboBox leaderFld = new JComboBox();
+    JLabel leaderLbl = new JLabel();
+    JButton cancelBtn = new JButton();
+    JButton saveBtn = new JButton();
     JLabel addMemberFormLbl = new JLabel();
    
-    public AddMemberView(){
-       initComponents();
-    }
     
+    public AddMemberView(){
+        initComponents();
+       
+    }
     private void initComponents(){
     JPanel addMemberPanel = new JPanel();
     //set label texts
@@ -53,10 +57,20 @@ public class AddMemberView extends JFrame implements ActionListener{
     memberLocationLbl.setText("Location");
     genderLbl.setText("Gender");
     civilStatusLbl.setText("Civil Status");
+    String[] civilStatusList = {"Single","Married","Separated","Widowed"};
+    civilStatusFld = new JComboBox(civilStatusList);
+    civilStatusFld.setSelectedIndex(0);
+    
     contactNoLbl.setText("Contact No");
     birthdateLbl.setText("Birthdate");
     schoolLbl.setText("School");
     occupationLbl.setText("Occupation");
+    
+    leaderLbl.setText("Leader");
+    String[] leaderList = {"Leader1","Leader2"};
+     leaderFld = new JComboBox(leaderList);
+     leaderFld.setSelectedIndex(0);
+
     saveBtn = new JButton("Save");
     cancelBtn = new JButton("Cancel");
     
@@ -82,6 +96,8 @@ public class AddMemberView extends JFrame implements ActionListener{
     addMemberPanel.add(schoolFld);
     addMemberPanel.add(occupationLbl);
     addMemberPanel.add(occupationFld);
+    addMemberPanel.add(leaderLbl);
+    addMemberPanel.add(leaderFld);
     addMemberPanel.add(saveBtn);
     addMemberPanel.add(cancelBtn);
     
@@ -130,9 +146,13 @@ public class AddMemberView extends JFrame implements ActionListener{
                                         .addComponent(birthdateFld)
                                         .addComponent(schoolFld)))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(occupationLbl)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(occupationLbl)
+                                        .addComponent(leaderLbl))
                                     .addGap(18, 18, 18)
-                                    .addComponent(occupationFld)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(occupationFld)
+                                        .addComponent(leaderFld, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cancelBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -171,7 +191,9 @@ public class AddMemberView extends JFrame implements ActionListener{
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(genderFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(genderLbl))
+                    .addComponent(genderLbl)
+                    .addComponent(leaderLbl)
+                    .addComponent(leaderFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(civilStatusLbl)
@@ -182,6 +204,7 @@ public class AddMemberView extends JFrame implements ActionListener{
         );
 
         pack();
+
         setLocationRelativeTo(null);
     }
 
@@ -191,6 +214,14 @@ public class AddMemberView extends JFrame implements ActionListener{
             member.setFname(fnameFld.getText());
             member.setMname(mnameFld.getText());
             member.setLname(lnameFld.getText());
+            member.setMemberLocation(memberLocationFld.getText());
+            member.setGender(genderFld.getText());
+            member.setCivilStatus(civilStatusFld.getSelectedIndex());
+            member.setContactNo(contactNoFld.getText());
+            member.setBirthdate(birthdateFld.getText());
+            member.setSchool(schoolFld.getText());
+            member.setOccupation(occupationFld.getText());
+            member.setLeader_id(leaderFld.getSelectedIndex());
             memberDao.createMember(member);
             JOptionPane.showMessageDialog(null,"Saved successfully!");
             
