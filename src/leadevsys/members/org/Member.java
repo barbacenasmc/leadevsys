@@ -12,6 +12,16 @@ public class Member {
     private String birthdate;
     private String school;
     private String occupation;
+    private int leader_id;
+
+    public int getLeader_id() {
+        return leader_id;
+    }
+
+    public void setLeader_id(int leader_id) {
+        this.leader_id = leader_id;
+    }
+    
 
     public int getMember_id() {
         return member_id;
