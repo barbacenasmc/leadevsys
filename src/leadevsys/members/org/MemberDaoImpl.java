@@ -17,7 +17,7 @@ public class MemberDaoImpl implements MemberDao{
     private final String SQL_CREATE_MEMBER = "INSERT INTO MEMBERS (member_id,fname,mname,lname,location, gender, civil_status, contact_no, birthdate, school, occupation, leader_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
     private final String SQL_GET_MEMBER_BY_ID = "SELECT* FROM MEMBERS WHERE member_id=?";
     private final String SQL_GET_ALL_MEMBERS = "SELECT * FROM MEMBERS";
-    private final String SQL_UPDATE_MEMBER = "UPDATE members SET fname = ?, mname = ?, lname = ? WHERE member_id = ?";
+    private final String SQL_UPDATE_MEMBER = "UPDATE members SET fname = ?, mname = ?, lname = ?,location = ?, gender = ?, civil_status = ?, contact_no = ?, birthdate = ?, school = ?, occupation = ?, leader_id = ? WHERE member_id = ?";
     private final String SQL_DELETE_MEMBER = "DELETE FROM members WHERE member_id = ?";
     @Override
     
@@ -32,13 +32,13 @@ public class MemberDaoImpl implements MemberDao{
                     member.setMname(rs.getString(3));
                     member.setLname(rs.getString(4));                    
                     member.setMemberLocation(rs.getString(5));                    
-                    member.setGender(rs.getString(5));                    
-                    member.setCivilStatus(rs.getString(6));                    
-                    member.setContactNo(rs.getString(7));                    
-                    member.setBirthdate(rs.getString(8));                    
-                    member.setSchool(rs.getString(9));                    
-                    member.setOccupation(rs.getString(10));                    
-                    member.setLeader_id(rs.getInt(11));
+                    member.setGender(rs.getString(6));                    
+                    member.setCivilStatus(rs.getInt(7));                    
+                    member.setContactNo(rs.getString(8));                    
+                    member.setBirthdate(rs.getString(9));                    
+                    member.setSchool(rs.getString(10));                    
+                    member.setOccupation(rs.getString(11));                    
+                    member.setLeader_id(rs.getInt(12));
                     allMembers.add(member);
                 }
             
@@ -58,7 +58,15 @@ public class MemberDaoImpl implements MemberDao{
                     member.setMemberId(rs.getInt(1));
                     member.setFname(rs.getString(2));
                     member.setMname(rs.getString(3));
-                    member.setLname(rs.getString(4));
+                    member.setLname(rs.getString(4));                      
+                    member.setMemberLocation(rs.getString(5));                    
+                    member.setGender(rs.getString(6));                    
+                    member.setCivilStatus(rs.getInt(7));                    
+                    member.setContactNo(rs.getString(8));                    
+                    member.setBirthdate(rs.getString(9));                    
+                    member.setSchool(rs.getString(10));                    
+                    member.setOccupation(rs.getString(11));                    
+                    member.setLeader_id(rs.getInt(12));
                 }
             }
         } catch (SQLException ex) {
@@ -75,6 +83,15 @@ public class MemberDaoImpl implements MemberDao{
            ps.setString(2,member.getFname());
            ps.setString(3, member.getMname());
            ps.setString(4, member.getLname());
+           ps.setString(5, member.getMemberLocation());  
+           ps.setString(6, member.getGender());  
+           ps.setInt(7, member.getCivilStatus());  
+           ps.setString(8, member.getContactNo());  
+           ps.setString(9, member.getBirthdate());  
+           ps.setString(10, member.getSchool());  
+           ps.setString(11, member.getOccupation());
+           ps.setInt(12, member.getLeader_id());    
+                   
            ps.executeUpdate();
            try(ResultSet generatedKeys= ps.getGeneratedKeys()){
             if(generatedKeys.next()){
@@ -91,9 +108,18 @@ public class MemberDaoImpl implements MemberDao{
         try(PreparedStatement ps = conn.prepareStatement(SQL_UPDATE_MEMBER)){
             ps.setString(1, member.getFname());
             ps.setString(2,member.getMname());
-            ps.setString(3, member.getLname());
-            ps.setInt(4, member.getMemberId());
+            ps.setString(3, member.getLname());          
+            ps.setString(4, member.getMemberLocation());  
+            ps.setString(5, member.getGender());  
+            ps.setInt(6, member.getCivilStatus());  
+            ps.setString(7, member.getContactNo());  
+            ps.setString(8, member.getBirthdate());  
+            ps.setString(9, member.getSchool());  
+            ps.setString(10, member.getOccupation());
+            ps.setInt(11, member.getLeader_id());
+            ps.setInt(12, member.getMemberId());
             ps.executeUpdate();
+            System.out.println("updated");
         } catch (SQLException ex) {
             Logger.getLogger(MemberDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }

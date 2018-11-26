@@ -7,7 +7,7 @@ public class Member {
     private String lname;
     private String memberLocation;
     private String gender;
-    private String civilStatus;
+    private int civilStatus;
     private String contactNo;
     private String birthdate;
     private String school;
@@ -47,11 +47,11 @@ public class Member {
         this.gender = gender;
     }
 
-    public String getCivilStatus() {
+    public int getCivilStatus() {
         return civilStatus;
     }
 
-    public void setCivilStatus(String civilStatus) {
+    public void setCivilStatus(int civilStatus) {
         this.civilStatus = civilStatus;
     }
 
