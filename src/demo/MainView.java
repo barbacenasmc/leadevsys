@@ -97,9 +97,29 @@ public class MainView extends JFrame implements ActionListener{
             MemberMgtView view = new MemberMgtView();
             view.setVisible(true);
       }else if(e.getSource()==manageCellGroupsBtn){
-            setVisible(false);
+            /*setVisible(false);
             this.dispose();
-
+            CellGroupMgtView view = new CellgroupMgtView();
+            view.setVisible(true);
+            */
+      }else if(e.getSource()==manageLeadersBtn){
+            /*setVisible(false);
+            this.dispose();
+            LeaderMgtView view = new LeaderMgtView();
+            view.setVisible(true);
+            */
+      }else if(e.getSource()==manageTrainingsBtn){
+            /*setVisible(false);
+            this.dispose();
+            TrainingMgtView view = new TrainingtView();
+            view.setVisible(true);
+            */
+      }else if(e.getSource()==manageAttendanceBtn){
+            /*setVisible(false);
+            this.dispose();
+            AttendanceMgtView view = new AttendanceMgtView();
+            view.setVisible(true);
+            */
       }
     }
 }
