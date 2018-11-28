@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
-
 public class EditMemberView extends AddMemberView implements ActionListener{
 
     int selected_member_id = 0;
@@ -19,7 +18,7 @@ public class EditMemberView extends AddMemberView implements ActionListener{
         mnameFld.setText(selectedMember.getMname());
         lnameFld.setText(selectedMember.getLname());
         memberLocationFld.setText(selectedMember.getMemberLocation());
-        genderFld.setText(selectedMember.getGender());
+        genderFld.setSelectedItem(selectedMember.getGender());
         civilStatusFld.setSelectedIndex(selectedMember.getCivilStatus());
         contactNoFld.setText(selectedMember.getContactNo());
         birthdateFld.setText(selectedMember.getBirthdate());
@@ -36,7 +35,7 @@ public class EditMemberView extends AddMemberView implements ActionListener{
             selectedMember.setMname(mnameFld.getText());
             selectedMember.setLname(lnameFld.getText());
             selectedMember.setMemberLocation(memberLocationFld.getText());
-            selectedMember.setGender(genderFld.getText());
+            selectedMember.setGender(String.valueOf(genderFld.getSelectedItem()));
             selectedMember.setCivilStatus(civilStatusFld.getSelectedIndex());
             selectedMember.setContactNo(contactNoFld.getText());
             selectedMember.setBirthdate(birthdateFld.getText());

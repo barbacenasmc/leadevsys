@@ -12,13 +12,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import demo.MainView;
+import static leadevsys.utils.org.CellGroupFormConstants.CG_TYPE_LIST;
 
 public class AddCGView extends JFrame implements ActionListener{
     CellGroupDao cgDao = new CellGroupDaoImpl();
     CellGroup cellgroup = new CellGroup();
     JTextField cgDayFld = new JTextField();
     JLabel cgDayLbl = new JLabel();
-    JTextField cgLeaderFld = new JTextField();
+    JComboBox cgLeaderFld = new JComboBox();
     JLabel cgLeaderLbl = new JLabel();
     JTextField cgLocationFld = new JTextField();
     JLabel cgLocationLbl = new JLabel();
@@ -44,9 +45,13 @@ public class AddCGView extends JFrame implements ActionListener{
         cgTimeLbl.setText("Time");
         cgTypeLbl.setText("Type");
         cgLeaderLbl.setText("Leader");
-        String[] cgTypeList = {"Youth Girls","Youth Boys","Women","Men","Senior Women", "Senior Men","Kids Boys","Kids Girls"};
-        cgTypeFld = new JComboBox(cgTypeList);
+        
+        String[] leaderList = {"Leader1","Leader2"};
+        cgLeaderFld = new JComboBox(leaderList);
+        cgLeaderFld.setSelectedIndex(0);
+        cgTypeFld = new JComboBox(CG_TYPE_LIST);
         cgTypeFld.setSelectedIndex(0);
+        
         saveCGBtn.setText("Save Cellgroup");
         cancelBtn.setText("Cancel");
         addCGPanel.add(cgLocationFld);
@@ -140,20 +145,19 @@ public class AddCGView extends JFrame implements ActionListener{
             cellgroup.setCgDay(cgDayFld.getText());
             cellgroup.setCgTime(cgTimeFld.getText());
             cellgroup.setCgType(cgTypeFld.getSelectedIndex());
-            cellgroup.setLeader_id(Integer.valueOf(cgLeaderFld.getText()));
+            cellgroup.setLeader_id(cgLeaderFld.getSelectedIndex());
             cgDao.createCG(cellgroup);
-            cgDao.insertCGType(cellgroup);
             JOptionPane.showMessageDialog(null,"Saved successfully!");
             
                 setVisible(false);
                 this.dispose();
-                MainView mainView = new MainView();
-                mainView.setVisible(true);
+                CellGroupMgtView view = new CellGroupMgtView();
+                view.setVisible(true);
         }else if(e.getSource()==cancelBtn){
                 setVisible(false);
                 this.dispose();
-                MainView mainView = new MainView();
-                mainView.setVisible(true);
+                CellGroupMgtView view = new CellGroupMgtView();
+                view.setVisible(true);
         }
     }
 }

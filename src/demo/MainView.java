@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import leadevsys.cellgroups.org.CellGroupMgtView;
 import leadevsys.members.org.MemberMgtView;
 
 public class MainView extends JFrame implements ActionListener{
@@ -97,11 +98,11 @@ public class MainView extends JFrame implements ActionListener{
             MemberMgtView view = new MemberMgtView();
             view.setVisible(true);
       }else if(e.getSource()==manageCellGroupsBtn){
-            /*setVisible(false);
+            setVisible(false);
             this.dispose();
-            CellGroupMgtView view = new CellgroupMgtView();
+            CellGroupMgtView view = new CellGroupMgtView();
             view.setVisible(true);
-            */
+            
       }else if(e.getSource()==manageLeadersBtn){
             /*setVisible(false);
             this.dispose();

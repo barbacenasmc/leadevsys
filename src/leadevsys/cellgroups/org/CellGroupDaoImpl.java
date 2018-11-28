@@ -14,11 +14,11 @@ import java.util.logging.Logger;
 public class CellGroupDaoImpl implements CellGroupDao{
     
     private final Connection conn = ConnectDB.getConnection();
-    private final String SQL_CREATE_MEMBER = "INSERT INTO CELLGROUPS (cg_id,cglocation,cgDay,cgTime,cgType,leader_id) VALUES (?,?,?,?,?,?)";
+    private final String SQL_CREATE_CELLGROUP = "INSERT INTO CELLGROUPS (cg_id,cglocation,cgDay,cgTime,cgType,leader_id) VALUES (?,?,?,?,?,?)";
     private final String SQL_INSERT_CELLGROUP_CGTYPE = "INSERT INTO CELLGROUP_CGTYPE (cellgroup_cgtype_id,cg_id,cgtype_id) VALUES (?,?,?)";
     private final String SQL_GET_CELLGROUP_BY_ID = "SELECT* FROM CELLGROUPS WHERE cg_id=?";
     private final String SQL_GET_ALL_CELLGROUPS =   "SELECT * FROM CELLGROUPS";
-    private final String SQL_UPDATE_MEMBER = "UPDATE CELLGROUPS SET cgLocation = ?, cgDay = ?, cgTime = ?, , cgType = ?, leader_id = ? WHERE cg_id = ?";
+    private final String SQL_UPDATE_MEMBER = "UPDATE CELLGROUPS SET cgLocation = ?, cgDay = ?, cgTime = ?, cgType = ?, leader_id = ? WHERE cg_id = ?";
     private final String SQL_DELETE_MEMBER = "DELETE FROM CELLGROUPS WHERE cg_id = ?";
     @Override
     
@@ -29,10 +29,11 @@ public class CellGroupDaoImpl implements CellGroupDao{
                 while (rs.next()){
                     CellGroup cellgroup = new CellGroup();
                     cellgroup.setCg_id(rs.getInt(1));
-                    cellgroup.setCgDay(rs.getString(2));                  
-                    cellgroup.setCgTime(rs.getString(3));
-                    cellgroup.setCgType(rs.getInt(4));
-                    cellgroup.setLeader_id(rs.getInt(5));
+                    cellgroup.setCgLocation(rs.getString(2));
+                    cellgroup.setCgDay(rs.getString(3));                  
+                    cellgroup.setCgTime(rs.getString(4));
+                    cellgroup.setCgType(rs.getInt(5));
+                    cellgroup.setLeader_id(rs.getInt(6));
                     allCellgroups.add(cellgroup);
                 }
             
@@ -50,10 +51,11 @@ public class CellGroupDaoImpl implements CellGroupDao{
             try(ResultSet rs = ps.executeQuery()){
                 while(rs.next()){
                     cellgroup.setCg_id(rs.getInt(1));
-                    cellgroup.setCgDay(rs.getString(2));                  
-                    cellgroup.setCgTime(rs.getString(3));
-                    cellgroup.setCgType(rs.getInt(4));
-                    cellgroup.setLeader_id(rs.getInt(5));
+                    cellgroup.setCgLocation(rs.getString(2)); 
+                    cellgroup.setCgDay(rs.getString(3));                  
+                    cellgroup.setCgTime(rs.getString(4));
+                    cellgroup.setCgType(rs.getInt(5));
+                    cellgroup.setLeader_id(rs.getInt(6));
                 }
             }
         } catch (SQLException ex) {
@@ -65,7 +67,7 @@ public class CellGroupDaoImpl implements CellGroupDao{
 
     @Override
     public void createCG(CellGroup cellgroup) {
-       try(PreparedStatement ps = conn.prepareStatement(SQL_CREATE_MEMBER,Statement.RETURN_GENERATED_KEYS)){
+       try(PreparedStatement ps = conn.prepareStatement(SQL_CREATE_CELLGROUP,Statement.RETURN_GENERATED_KEYS)){
            ps.setInt(1,cellgroup.getCg_id());
            ps.setString(2,cellgroup.getCgLocation());
            ps.setString(3, cellgroup.getCgDay());

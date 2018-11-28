@@ -8,5 +8,6 @@ public interface MemberDao {
     public void createMember(Member member);
     public void updateMember(Member member);
     public void deleteMember(int member_id);
+    public Member getMemberByName(String keyword);
     
 }

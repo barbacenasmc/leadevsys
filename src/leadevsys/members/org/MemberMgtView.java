@@ -15,13 +15,15 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import leadevsys.utils.org.MemberFormConstants;
+import static leadevsys.utils.org.MemberFormConstants.CIVIL_STATUS_LIST;
+import static leadevsys.utils.org.MemberFormConstants.GENDER;
 
 public class MemberMgtView extends JFrame implements ActionListener{
        
         JLabel dashboardTitleLbl = new JLabel();
         JScrollPane jScrollPane1 = new JScrollPane();
         JTable memberTable = new JTable();
-        JTextField searchMemberFld = new JTextField();
+        JTextField searchFld = new JTextField();
         JButton searchBtn = new JButton();
         JButton addBtn = new JButton();
         JButton editBtn = new JButton ();
@@ -36,7 +38,7 @@ public class MemberMgtView extends JFrame implements ActionListener{
         JPanel mainViewPanel = new JPanel();
         dashboardTitleLbl.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         dashboardTitleLbl.setText("Member Management Dashboard");
-        searchMemberFld.setText("Enter search keyword");
+        searchFld.setText("Enter search keyword");
         searchBtn.setText("Search");
         addBtn.setText("Add");
         editBtn.setText("Edit");
@@ -45,7 +47,7 @@ public class MemberMgtView extends JFrame implements ActionListener{
         FillTable();
         mainViewPanel.add(dashboardTitleLbl);
         mainViewPanel.add(jScrollPane1, BorderLayout.CENTER);
-        mainViewPanel.add(searchMemberFld);
+        mainViewPanel.add(searchFld);
         mainViewPanel.add(searchBtn);
         mainViewPanel.add(addBtn);
         addBtn.addActionListener(this);
@@ -71,7 +73,7 @@ public class MemberMgtView extends JFrame implements ActionListener{
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(searchMemberFld, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(searchFld, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(searchBtn))
                             .addGroup(layout.createSequentialGroup()
@@ -90,7 +92,7 @@ public class MemberMgtView extends JFrame implements ActionListener{
                 .addComponent(dashboardTitleLbl)
                 .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchMemberFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchBtn))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,7 +118,7 @@ public class MemberMgtView extends JFrame implements ActionListener{
         jScrollPane1 = new JScrollPane(memberTable);
         MemberDao memberDao = new MemberDaoImpl();
         for (Member member : memberDao.getAllMembers()) {
-         tableModel.addRow(new Object[] { member.getMemberId() , member.getFname(),member.getMname(), member.getLname(), member.getMemberLocation(), member.getGender(),MemberFormConstants.civilStatusList[member.getCivilStatus()], member.getContactNo(),member.getBirthdate(),member.getSchool(),member.getOccupation(),member.getLeader_id()});
+         tableModel.addRow(new Object[] { member.getMemberId() , member.getFname(),member.getMname(), member.getLname(), member.getMemberLocation(), member.getGender(),CIVIL_STATUS_LIST[member.getCivilStatus()], member.getContactNo(),member.getBirthdate(),member.getSchool(),member.getOccupation(),member.getLeader_id()});
         }
        }
 
@@ -140,20 +142,25 @@ public class MemberMgtView extends JFrame implements ActionListener{
             this.dispose();
             EditMemberView view = new EditMemberView(getSelectedMemberId());
             view.setVisible(true);
-      }else if(e.getSource()==deleteBtn){
-          
+      }else if(e.getSource()==deleteBtn){          
           int input = JOptionPane.showConfirmDialog(null, "Are you sure to delete?");
           if (input==0){
-             MemberDao deletedMemberDao = new MemberDaoImpl();
-             deletedMemberDao.deleteMember(getSelectedMemberId()); 
+            MemberDao deletedMemberDao = new MemberDaoImpl();
+            deletedMemberDao.deleteMember(getSelectedMemberId()); 
+            setVisible(false);
             this.dispose();
             MemberMgtView view = new MemberMgtView();
             view.setVisible(true);
        }else if(e.getSource()==searchBtn){
-           
+           MemberDao searchMemberDao = new MemberDaoImpl();
+           searchMemberDao.getMemberByName(searchFld.getText());
+           setVisible(false);
+           this.dispose();
+           MemberMgtView view = new MemberMgtView();
+           view.setVisible(true);
 
       }
     }
-    }
+  }
 }    
 

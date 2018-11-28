@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import static leadevsys.utils.org.MemberFormConstants.CIVIL_STATUS_LIST;
+import static leadevsys.utils.org.MemberFormConstants.GENDER;
 
 public class AddMemberView extends JFrame implements ActionListener{
     MemberDao memberDao = new MemberDaoImpl(); 
@@ -31,7 +33,7 @@ public class AddMemberView extends JFrame implements ActionListener{
     JLabel civilStatusLbl = new JLabel();
     JTextField contactNoFld = new JTextField();;
     JLabel contactNoLbl = new JLabel();
-    JTextField genderFld = new JTextField();
+    JComboBox genderFld = new JComboBox();
     JLabel genderLbl = new JLabel();
     JComboBox leaderFld = new JComboBox();
     JLabel leaderLbl = new JLabel();
@@ -56,9 +58,11 @@ public class AddMemberView extends JFrame implements ActionListener{
 
     memberLocationLbl.setText("Location");
     genderLbl.setText("Gender");
+    genderFld = new JComboBox(GENDER);
+    genderFld.setSelectedIndex(0);
+    
     civilStatusLbl.setText("Civil Status");
-    String[] civilStatusList = {"Single","Married","Separated","Widowed"};
-    civilStatusFld = new JComboBox(civilStatusList);
+    civilStatusFld = new JComboBox(CIVIL_STATUS_LIST);
     civilStatusFld.setSelectedIndex(0);
     
     contactNoLbl.setText("Contact No");
@@ -215,7 +219,7 @@ public class AddMemberView extends JFrame implements ActionListener{
             member.setMname(mnameFld.getText());
             member.setLname(lnameFld.getText());
             member.setMemberLocation(memberLocationFld.getText());
-            member.setGender(genderFld.getText());
+            member.setGender(GENDER[genderFld.getSelectedIndex()]);
             member.setCivilStatus(civilStatusFld.getSelectedIndex());
             member.setContactNo(contactNoFld.getText());
             member.setBirthdate(birthdateFld.getText());

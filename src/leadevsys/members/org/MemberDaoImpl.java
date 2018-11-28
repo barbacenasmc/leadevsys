@@ -16,7 +16,7 @@ public class MemberDaoImpl implements MemberDao{
     private final Connection conn = ConnectDB.getConnection();
     private final String SQL_CREATE_MEMBER = "INSERT INTO MEMBERS (member_id,fname,mname,lname,location, gender, civil_status, contact_no, birthdate, school, occupation, leader_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
     private final String SQL_GET_MEMBER_BY_ID = "SELECT* FROM MEMBERS WHERE member_id=?";
-  //  private final String SQL_GET_MEMBER_BY_NAME = "SELECT* FROM MEMBERS WHERE fname=? or ";
+    private final String SQL_GET_MEMBER_BY_NAME = "SELECT* FROM MEMBERS WHERE fname like '%?%' or mname like '%?%' or lname like '%?%'";
     private final String SQL_GET_ALL_MEMBERS = "SELECT * FROM MEMBERS";
     private final String SQL_UPDATE_MEMBER = "UPDATE members SET fname = ?, mname = ?, lname = ?,location = ?, gender = ?, civil_status = ?, contact_no = ?, birthdate = ?, school = ?, occupation = ?, leader_id = ? WHERE member_id = ?";
     private final String SQL_DELETE_MEMBER = "DELETE FROM members WHERE member_id = ?";
@@ -136,6 +136,33 @@ public class MemberDaoImpl implements MemberDao{
         }
     }
 
+    @Override
+    public Member getMemberByName(String keyword ) {
+        Member member = new Member();
+        try(PreparedStatement ps = conn.prepareStatement(SQL_GET_MEMBER_BY_NAME)){
+            ps.setString(1,keyword);
+            try(ResultSet rs = ps.executeQuery()){
+                while(rs.next()){
+                    member.setMemberId(rs.getInt(1));
+                    member.setFname(rs.getString(2));
+                    member.setMname(rs.getString(3));
+                    member.setLname(rs.getString(4));                      
+                    member.setMemberLocation(rs.getString(5));                    
+                    member.setGender(rs.getString(6));                    
+                    member.setCivilStatus(rs.getInt(7));                    
+                    member.setContactNo(rs.getString(8));                    
+                    member.setBirthdate(rs.getString(9));                    
+                    member.setSchool(rs.getString(10));                    
+                    member.setOccupation(rs.getString(11));                    
+                    member.setLeader_id(rs.getInt(12));
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MemberDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return member;
+    }
 
     
 }
